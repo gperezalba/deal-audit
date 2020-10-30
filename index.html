@@ -41,6 +41,7 @@
 
         async function voteDealAuditor() {
             document.getElementById("response").innerHTML = "Espere..."
+            let wallet = await getWallet();
             let dealId = getVoteDealId();
             let isSuccess = getSuccessfulness();
             let contractADDRESS = getContractAddress();
