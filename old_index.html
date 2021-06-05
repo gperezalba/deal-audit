@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="https://www.pimarkets.io/favicon.ico"/>
+    <title>PiMarkets Auditoría</title>
+    <script charset="utf-8"
+        src="https://cdn.ethers.io/scripts/ethers-v4.min.js"
+        type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        const contractABI = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isTDN","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_token1","type":"address"},{"name":"_token2","type":"address"},{"name":"_oracle","type":"address"}],"name":"setPriceOracle","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_dealId","type":"bytes32"},{"name":"_vote","type":"uint8"}],"name":"voteDeal","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_tokens","type":"address[2]"},{"name":"_amounts","type":"uint256[2]"},{"name":"_settings","type":"bool[2]"},{"name":"_limits","type":"uint256[3]"},{"name":"_auditor","type":"address"},{"name":"_description","type":"string"},{"name":"_metadata","type":"uint256[]"},{"name":"_fixedBuyer","type":"address"}],"name":"offerFixed","outputs":[{"name":"","type":"bytes32"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_newCommission","type":"uint256"}],"name":"setCommission","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_value","type":"uint256"}],"name":"tokenFallback","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"offers","outputs":[{"name":"owner","type":"address"},{"name":"sellToken","type":"address"},{"name":"sellAmount","type":"uint256"},{"name":"isPartial","type":"bool"},{"name":"buyToken","type":"address"},{"name":"buyAmount","type":"uint256"},{"name":"minDealAmount","type":"uint256"},{"name":"maxDealAmount","type":"uint256"},{"name":"minReputation","type":"uint256"},{"name":"auditor","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_dealId","type":"bytes32"},{"name":"_success","type":"bool"}],"name":"voteDealAuditor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"offerLockedUser","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_offerId","type":"bytes32"},{"name":"_buyAmount","type":"uint256"}],"name":"deal","outputs":[{"name":"","type":"bytes32"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"on","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_dealId","type":"bytes32"}],"name":"requestAuditor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_token","type":"address"},{"name":"_isTDN","type":"bool"}],"name":"setTDN","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"deals","outputs":[{"name":"sellToken","type":"address"},{"name":"buyToken","type":"address"},{"name":"isBuyFiat","type":"bool"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"buyAmount","type":"uint256"},{"name":"sellAmount","type":"uint256"},{"name":"vote1","type":"uint8"},{"name":"vote2","type":"uint8"},{"name":"auditor","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_offerId","type":"bytes32"},{"name":"_buyAmount","type":"uint256"}],"name":"updateBuyAmount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"salt","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"toggleSwitch","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"priceOracle","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"commission","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_tokens","type":"address[2]"},{"name":"_amounts","type":"uint256[2]"},{"name":"_settings","type":"bool[2]"},{"name":"_limits","type":"uint256[3]"},{"name":"_auditor","type":"address"},{"name":"_description","type":"string"},{"name":"_metadata","type":"uint256[]"}],"name":"offer","outputs":[{"name":"","type":"bytes32"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"offerFixedBuyer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"controller","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_offerId","type":"bytes32"}],"name":"cancelOffer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_controllerAddress","type":"address"},{"name":"_commission","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"sellToken","type":"address"},{"indexed":false,"name":"buyToken","type":"address"},{"indexed":false,"name":"sellAmount","type":"uint256"},{"indexed":false,"name":"buyAmount","type":"uint256"},{"indexed":false,"name":"isPartial","type":"bool"},{"indexed":false,"name":"isBuyFiat","type":"bool"},{"indexed":false,"name":"limits","type":"uint256[3]"},{"indexed":false,"name":"auditor","type":"address"},{"indexed":false,"name":"description","type":"string"},{"indexed":true,"name":"offerId","type":"bytes32"},{"indexed":false,"name":"metadata","type":"uint256[]"}],"name":"NewOffer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"dealId","type":"bytes32"},{"indexed":false,"name":"success","type":"bool"},{"indexed":true,"name":"sender","type":"address"}],"name":"NewDeal","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"offerId","type":"bytes32"},{"indexed":true,"name":"dealId","type":"bytes32"},{"indexed":false,"name":"buyer","type":"address"},{"indexed":false,"name":"sellAmount","type":"uint256"},{"indexed":false,"name":"buyAmount","type":"uint256"}],"name":"NewPendingDeal","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"offerId","type":"bytes32"},{"indexed":false,"name":"sellAmount","type":"uint256"},{"indexed":false,"name":"buyAmount","type":"uint256"}],"name":"UpdateOffer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"offerId","type":"bytes32"}],"name":"CancelOffer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"dealId","type":"bytes32"},{"indexed":false,"name":"sender","type":"address"},{"indexed":false,"name":"vote","type":"uint8"},{"indexed":false,"name":"counterpartVote","type":"uint8"}],"name":"VoteDeal","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"dealId","type":"bytes32"}],"name":"AuditorNotification","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"user","type":"address"},{"indexed":false,"name":"reputation","type":"uint256"}],"name":"UpdateReputation","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"user","type":"address"},{"indexed":false,"name":"tokenAddress","type":"address"},{"indexed":false,"name":"isLocked","type":"bool"}],"name":"OfferLock","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"commission","type":"uint256"}],"name":"NewCommission","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"offerId","type":"bytes32"},{"indexed":false,"name":"fixedBuyer","type":"address"}],"name":"FixedBuyer","type":"event"}];
+        const URL = "https://connect.pichain.io";
+        //const URL = "http://52.28.106.166:23001";
+        const GRAPH_URL = "https://graph.pimarkets.io";
+        const SUBGRAPH = "/subgraphs/name/gperezalba/bank-subgraph-mainnet";
+		const PATH_0 = "m/44'/60'/0'/0/0";
+        const AUDITOR_ADDR = "0xaC40F43E0a69C101BCDB7C4C605781e8Df434757";
+
+        async function getDeals() {
+            let tokenKind = getTokenKind();
+            let seller = getSeller();
+            let buyer = getBuyer();
+            let query = await buildQuery(tokenKind, seller, buyer);
+            let market = getMarket();
+            let subgraph = buildSubgraph(market);
+            let response = await querySubgraph(query, subgraph);
+            document.getElementById("deals").innerHTML = "";
+            let deals = response[tokenKind];
+            deals.forEach(function (deal) {
+                let inp = document.getElementById("deals").innerHTML;
+                document.getElementById("deals").innerHTML = inp +
+                    "------------------------------------------------------------------------------------" + " <br> " +
+                    "VENDEDOR: " + deal.seller.name + " <br> " +
+                    "COMPRADOR: " + deal.buyer.name + " <br> " +
+                    "OFERTA: " + deal.offer.sellToken.tokenSymbol + " <br> " +
+                    "A CAMBIO DE: " + deal.offer.buyToken.tokenSymbol + " <br> " +
+                    "ID: " + deal.id;
+            })
+        }
+
+        async function voteDealAuditor() {
+            document.getElementById("response").innerHTML = "Espere..."
+            let wallet = await getWallet();
+            let dealId = getVoteDealId();
+            let isSuccess = getSuccessfulness();
+            let contractADDRESS = getContractAddress();
+
+            if ((wallet.address == AUDITOR_ADDR) && (isSuccess != null)) {
+                
+                try {
+                    let contract = getContractSigner(contractADDRESS, contractABI, wallet);
+                    let response = await contract.voteDealAuditor(dealId, isSuccess, {gasPrice: 0, gasLimit: 6283184});
+                    let receipt = await response.wait();
+                    document.getElementById("response").innerHTML = "LIBERACIÓN EXITOSA";
+                } catch (error) {
+                    document.getElementById("response").innerHTML = error.message;
+                    console.error(error);
+                }
+            } else {
+                alert("Los datos insertados son incorrectos/insuficientes")
+            }
+        }
+
+        function getContractAddress() {
+            let selectorElement = document.getElementById("contractAddress");
+		    let contractAddress = selectorElement.options[selectorElement.selectedIndex].value;
+            return contractAddress;
+        }
+
+        async function buildQuery(tokenKind, seller, buyer) {
+            let sellerWallet = await getWalletByName(seller);
+            let buyerWallet = await getWalletByName(buyer);
+            let query = '{ ' + tokenKind + ' (where:{seller:"' + sellerWallet + '", buyer:"' + buyerWallet + '", isPending:true}, orderBy: timestamp, orderDirection: desc) { id seller { name } buyer { name } offer { sellToken { tokenSymbol } buyToken { tokenSymbol } } timestamp buyerVote sellerVote } }';
+            return query;
+        }
+
+        async function getWalletByName(name) {
+            let subgraph = "/subgraphs/name/gperezalba/p2p-v2-mainnet";
+            let query = '{ users(where:{name:"' + name + '"}) { id }}';
+            let response = await querySubgraph(query, subgraph);
+            let wallet = response.users[0].id;
+            return wallet;
+        }
+
+        function buildSubgraph(market) {
+            let subgraph = "/subgraphs/name/gperezalba/" + market;
+            return subgraph;
+        }
+
+        function getVoteDealId() {
+            let voteDealId = document.getElementById("voteDealId").value;
+            return voteDealId;
+        }
+
+        function getSeller() {
+            let seller = document.getElementById("seller").value;
+            return seller;
+        }
+
+        function getBuyer() {
+            let buyer = document.getElementById("buyer").value;
+            return buyer;
+        }
+
+        function getSuccessfulness() {
+            let selectorElement = document.getElementById("isSuccess");
+		    let isSuccess = selectorElement.options[selectorElement.selectedIndex].value;
+
+            if (isSuccess == 'true') {
+                return true;
+            } else if (isSuccess == 'false') {
+                return false;
+            } else {
+                alert("No ha seleccionado el tipo de resolución")
+                return null;
+            }
+        }
+
+        function getTokenKind() {
+            let selectorElement = document.getElementById("tokenKind");
+		    let tokenKind = selectorElement.options[selectorElement.selectedIndex].value;
+
+            return tokenKind;
+        }
+
+        function getMarket() {
+            let selectorElement = document.getElementById("market");
+		    let market = selectorElement.options[selectorElement.selectedIndex].value;
+
+            return market;
+        }
+
+        async function getWallet() {
+            let mnemonic = document.getElementById("mnemonic").value;
+            if (!isValidMnemonic(mnemonic)) {
+                alert("El mnemónico es inválido");
+            }
+            let owner = await createWalletFromMnemonic(mnemonic, PATH_0);
+            return owner;
+        }
+
+        async function querySubgraph(query, subgraph) {
+            let response;
+            let responseData;
+
+            try {
+                response = await fetch(GRAPH_URL + subgraph, {
+                    "method": 'POST',
+                    "headers": {
+                        "Accept": 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    "body": JSON.stringify({
+                        query: query
+                    }),
+                });
+
+                if (response.ok) {
+                    responseData = await response.json();
+                    return responseData.data;
+                } else {
+                    return null;
+                }   
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }
+
+        function getContractSigner(address, abi, wallet) {
+            wallet = wallet.connect(getProvider());
+            return getContractCaller(address, abi).connect(wallet);
+        }
+
+        function getContractCaller(address, abi) {
+            return new ethers.Contract(address, abi, getProvider());
+        }
+
+        function getProvider() {
+            return new ethers.providers.JsonRpcProvider(URL);
+        }
+
+		function createWalletFromMnemonic(mnemonic, path) {
+			return ethers.Wallet.fromMnemonic(mnemonic, path);
+		}
+
+		function isValidMnemonic(mnemonic) {
+			return ethers.utils.HDNode.isValidMnemonic(mnemonic);
+		}
+
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <style type='text/css'>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            background-color: #004381
+        }
+        
+        h1 {
+            color: white;
+        }
+
+        h2 {
+            color: white;
+        }
+
+        h3 {
+            color: white;
+        }
+
+        h4 {
+            color: white;
+        }
+
+        .mySelector {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            width: 150px;
+            font-size: 16px;
+        }
+
+        .myButton {
+            box-shadow: 0px 1px 0px 0px #fff6af;
+            background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+            background-color:#ffec64;
+            border-radius:6px;
+            border:1px solid #ffaa22;
+            display:inline-block;
+            cursor:pointer;
+            color:#333333;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #ffee66;
+        }
+        .myButton:hover {
+            background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+            background-color:#ffab23;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+        .redondeadonorelieve {
+            border-radius: 5px;
+            border: 1px solid #39c;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .center {
+            margin: auto;
+            padding: 10px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <div class="center">
+        <h1>Pi Markets</h1>
+        <h2> -- Auditoría de pactos --</h2>
+        
+        <h4>Insertar MNEMÓNICO</h4>
+        <input type="text" class="redondeadonorelieve" id="mnemonic" size="120" placeholder="Insertar las 12 palabras del mnemónico (todas en minúscula y separadas por un espacio)">
+        <br>
+        <h4>Seleccionar mercado</h4>
+        <select class="mySelector" name="contractAddress" id="contractAddress">
+            <option value='0x79CD02c64f780AD6105DCD2e6D34A5cAB3558AE7'>[SECUNDARIO]-[DIVISAS] - Oferta TOKEN</option>
+            <option value='0x609072E59A4223eb0747795222D1B8FCFB29C046'>[SECUNDARIO]-[DIVISAS] - Oferta FIAT</option>
+            <option value='0x4247bc2a705c0250f13437f6d2749880a852fb33'>[SECUNDARIO]-[PACKABLE] - Oferta PACKABLE</option>
+            <option value='0x33bF66029CbD43a8875b0E3a470AdAd360573b19'>[SECUNDARIO]-[PACKABLE] - Oferta FIAT</option>
+            <option value='0xb1668b861f48F72e0B56F0604708cDdc5A4CE2D3'>[SECUNDARIO]-[COLECCIONABLE] - Oferta COLECCIONABLE</option>
+            <option value='0x00ed81699f43b1706b48a45d77a6f27ad9803377'>[PRIMARIO]-[DIVISAS] - Oferta TOKEN</option>
+            <option value='0x36fa33a62b8eb5d108d6225f3479d0d1a247821d'>[PRIMARIO]-[PACKABLE] - Oferta PACKABLE</option>
+            <option value='0x7549c11d2B445Ab83dFfC689E4360c1C0d676699'>[PRIMARIO]-[COLECCIONABLE] - Oferta COLECCIONABLE</option>
+        </select>
+        <h4>Insertar ID del pacto</h4>
+        <input type="text" class="redondeadonorelieve" id="voteDealId" size="120" placeholder="Insertar ID del pacto">
+        <br>
+        <br>
+        <select class="mySelector" name="isSuccess" id="isSuccess">
+            <option value='null'>(Resolución)</option>
+            <option value='true'>EXITOSO</option>
+            <option value='false'>NO EXITOSO</option>
+        </select>
+        <br>
+        <br>
+        <button class="myButton" onclick="voteDealAuditor();">Liberar</button>
+        <br>
+        <br>
+        <div style="color: white;" id="response"></div>
+        <br>
+        <br>
+        <hr style="color: #0056b2;" />
+        <h3> -- Buscador de pactos --</h3>
+        <select class="mySelector" name="tokenKind" id="tokenKind">
+            <option value='deals'>ERC223</option>
+            <option value='dealPackables'>PACKABLE</option>
+            <option value='dealCommodities'>COLECCIONABLE</option>
+        </select>
+        <br>
+        <br>
+        <select class="mySelector" name="market" id="market">
+            <option value='p2p-v2-mainnet'>SECUNDARIO</option>
+            <option value='p2p-primary-v2-mainnet'>PRIMARIO</option>
+        </select>
+        <br>
+        <br>
+        <h4>VENDEDOR</h4>
+        <input type="text" class="redondeadonorelieve" id="seller" placeholder="Vendedor">
+
+        <h4>COMPRADOR</h4>
+        <input type="text" class="redondeadonorelieve" id="buyer" placeholder="Comprador">
+        <br>
+        <br>
+        <button class="myButton" onclick="getDeals();">Buscar</button>
+        <br>
+        <br>
+        <div style="color: white;" id="deals"></div>
+        
+        
+
+        
+
+        
+        
+        
+    </div>
+  </body>
+</html>
